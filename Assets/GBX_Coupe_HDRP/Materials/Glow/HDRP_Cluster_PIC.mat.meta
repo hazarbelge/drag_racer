@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 200d0ca4a3f0ef64b943661667861ee3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Glow/HDRP_Cluster_PIC.mat
+  uploadId: 409682

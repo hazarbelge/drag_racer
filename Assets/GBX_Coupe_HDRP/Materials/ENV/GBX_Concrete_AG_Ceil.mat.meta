@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ce9261bb9e2ce844b929e2e38a66611b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/ENV/GBX_Concrete_AG_Ceil.mat
+  uploadId: 409682

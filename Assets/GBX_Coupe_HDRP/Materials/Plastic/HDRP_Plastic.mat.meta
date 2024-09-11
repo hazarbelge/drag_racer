@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 24e243ac2b9d1a849a65ec4db0bdfa73
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Plastic/HDRP_Plastic.mat
+  uploadId: 409682

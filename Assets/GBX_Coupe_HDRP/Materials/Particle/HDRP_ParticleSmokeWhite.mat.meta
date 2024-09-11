@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25104f2137393654d9ec9a2977b10410
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Particle/HDRP_ParticleSmokeWhite.mat
+  uploadId: 409682

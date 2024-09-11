@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5df512f9c32ff7049af1d3bccb28345d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Glow/HDRP_Inst_Panel_Glow_Red.mat
+  uploadId: 409682

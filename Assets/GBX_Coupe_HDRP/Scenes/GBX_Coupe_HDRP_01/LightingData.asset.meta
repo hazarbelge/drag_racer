@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b7302954f15246e49a3cfbcea3360b4f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Scenes/GBX_Coupe_HDRP_01/LightingData.asset
+  uploadId: 409682

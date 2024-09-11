@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f6faa1a6401ac3144a1e664fd822065b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Scenes/GBX_Coupe_HDRP_02_Rotate/LightingData.asset
+  uploadId: 409682

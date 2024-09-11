@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3258053950a0f264a9c7a3a6a0d660b8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Glow/HDRP_Text_White_Glow.mat
+  uploadId: 409682

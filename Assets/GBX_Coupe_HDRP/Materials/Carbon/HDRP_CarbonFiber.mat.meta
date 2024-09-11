@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ce7764ac09d9f6c4e9d45e3c9184489a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Carbon/HDRP_CarbonFiber.mat
+  uploadId: 409682

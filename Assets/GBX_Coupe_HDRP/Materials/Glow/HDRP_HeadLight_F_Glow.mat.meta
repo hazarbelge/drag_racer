@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a047b9939574e9b47ac63c7f95bb92c7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Glow/HDRP_HeadLight_F_Glow.mat
+  uploadId: 409682

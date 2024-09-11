@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3ca59fc40baba5d40a9b70719684d2ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/CarPaint/HDRP_Pearl_Yellow.mat
+  uploadId: 409682

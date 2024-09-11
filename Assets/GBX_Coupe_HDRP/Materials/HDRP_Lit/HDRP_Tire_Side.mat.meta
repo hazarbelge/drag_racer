@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc3b993753fa31c4fb451ca85f2a0ad8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/HDRP_Lit/HDRP_Tire_Side.mat
+  uploadId: 409682

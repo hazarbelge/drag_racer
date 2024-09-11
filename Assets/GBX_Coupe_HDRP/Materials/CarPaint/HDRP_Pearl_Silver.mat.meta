@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a57e1756ed4961b49b0af540fab92c5a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/CarPaint/HDRP_Pearl_Silver.mat
+  uploadId: 409682

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7f42e3c4121aa3f45b5cefbe8b3e8c88
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/Plastic/HDRP_PlasticDirt.mat
+  uploadId: 409682

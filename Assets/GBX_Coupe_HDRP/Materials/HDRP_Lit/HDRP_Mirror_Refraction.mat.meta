@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ca2fbf4ad0e7dcd43b2e66b1a987dafb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185778
+  packageName: GBX_COUPE_HDRP
+  packageVersion: 1.0
+  assetPath: Assets/GBX_Coupe_HDRP/Materials/HDRP_Lit/HDRP_Mirror_Refraction.mat
+  uploadId: 409682
