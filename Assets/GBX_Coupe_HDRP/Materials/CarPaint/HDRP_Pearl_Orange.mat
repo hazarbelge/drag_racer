@@ -354,9 +354,9 @@ Material:
     - Color_CF7B3627: {r: 0.509434, g: 0.25029993, b: 0, a: 0}
     - Color_F141EB95: {r: 0, g: 0.17731243, b: 0.745283, a: 0}
     - Vector2_AB87CEC4: {r: 120, g: 120, b: 0, a: 0}
-    - _BaseColor: {r: 0.8396226, g: 0.67724276, b: 0.7479908, a: 1}
+    - _BaseColor: {r: 1, g: 0.34963012, b: 0, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.8396226, g: 0.67724276, b: 0.7479907, a: 1}
+    - _Color: {r: 1, g: 0.3496301, b: 0, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
