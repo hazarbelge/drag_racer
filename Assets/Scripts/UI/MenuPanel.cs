@@ -1,12 +1,12 @@
-using UnityEngine;
+using UI.Base;
 
 namespace UI
 {
-    public class MenuPanel : MonoBehaviour
-    {
+    public class MenuPanel : BasePanel
+    { 
         public void OnPlayClicked()
         {
-            Debug.Log("Play Button clicked");
+            UiManager.OnPlayClicked();
         }
     }
 }
