@@ -6,7 +6,7 @@ namespace UI
     { 
         public void OnPlayClicked()
         {
-            UiManager.OnPlayClicked();
+            UIController.OnPlayClicked();
         }
     }
 }

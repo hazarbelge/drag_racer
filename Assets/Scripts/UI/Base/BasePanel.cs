@@ -7,12 +7,12 @@ namespace UI.Base
     [RequireComponent(typeof(CanvasGroup))]
     public class BasePanel : MonoBehaviour
     {
-        protected UIManager UiManager;
+        protected UIController UIController;
         private CanvasGroup _canvasGroup;
         
-        public virtual void Init(UIManager uiManager)
+        public virtual void Init(UIController uiController)
         {
-            UiManager = uiManager;
+            UIController = uiController;
             _canvasGroup = GetComponent<CanvasGroup>();
         }
         
@@ -47,5 +47,7 @@ namespace UI.Base
                 onComplete?.Invoke();
             });
         }
+        
+        public bool IsVisible() => _canvasGroup.alpha > 0 && gameObject.activeInHierarchy;
     }
 }
