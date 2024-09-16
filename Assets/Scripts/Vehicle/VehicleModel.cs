@@ -92,11 +92,14 @@ namespace Vehicle
             
             if (!_isThrottleActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm + 600f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
+            var increaseRate = 600f * SpeedRpmIncreaseMultiplier;
+            var limitDecreaseRate = 3500f * SpeedRpmIncreaseMultiplier;
             
-            if (EngineRpm >= ShiftUpRpm + 20f)
+            EngineRpm = Mathf.Clamp(EngineRpm + increaseRate, ShiftDownRpm, MaxRpm);
+            
+            if (EngineRpm >= ShiftUpRpm + increaseRate * 4f)
             {
-                EngineRpm = Mathf.Clamp(EngineRpm - 3000f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
+                EngineRpm = Mathf.Clamp(EngineRpm - limitDecreaseRate, ShiftDownRpm, MaxRpm);
             }
         }
         
@@ -106,7 +109,9 @@ namespace Vehicle
             
             if (!_isBrakeActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 1500f * SpeedRpmIncreaseMultiplier * (forceStop ? 5f : 1f), ShiftDownRpm, MaxRpm);
+            var brakeRate = 1500f * SpeedRpmIncreaseMultiplier * (forceStop ? 5f : 1f);
+            
+            EngineRpm = Mathf.Clamp(EngineRpm - brakeRate, ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyDeceleration(bool isDecelerationActive)
@@ -115,7 +120,9 @@ namespace Vehicle
             
             if (!_isDecelerationActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 300f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
+            var decreaseRate = 300f * SpeedRpmIncreaseMultiplier;
+            
+            EngineRpm = Mathf.Clamp(EngineRpm - decreaseRate, ShiftDownRpm, MaxRpm);
         }
         
         public void UpdateVehicle(float deltaTime)

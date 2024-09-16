@@ -28,18 +28,12 @@ namespace Vehicle
 
         private void InitVehicleModel()
         {
-            float[] maxSpeedsInMs = { 14.69f, 24.96f, 35.33f, 48.37f, 67.13f};
-            const float shiftDownRpm = 1000f;
-            const float shiftUpRpm = 5800f;
-            const float maxRpm = 6000f;
-            const float tireDiameter = 0.33f;
-
             _vehicleModel = new VehicleModel(
-                maxSpeedsInMs,
-                shiftDownRpm,
-                shiftUpRpm,
-                maxRpm,
-                tireDiameter
+                VehicleConfig.MaxSpeedsInMs,
+                VehicleConfig.ShiftDownRpm,
+                VehicleConfig.ShiftUpRpm,
+                VehicleConfig.MaxRpm,
+                VehicleConfig.TireDiameter
             );
         }
         
@@ -53,6 +47,12 @@ namespace Vehicle
         {
             if (_gameController.GameState == GameState.Menu) return;
             
+            ApplyInputs();
+            UpdateCarState();
+        }
+
+        private void ApplyInputs()
+        {
             if (_gameController.GameState is GameState.Racing or GameState.Countdown)
             {
                 _vehicleModel.ApplyBrake(BrakeInput);
@@ -65,7 +65,10 @@ namespace Vehicle
             }
             
             _vehicleAudio.UpdateEngineSound();
-            
+        }
+
+        private void UpdateCarState()
+        {
             if (_gameController.GameState is GameState.Racing or GameState.PostRace)
             {
                 var deltaTime = Time.deltaTime;

@@ -17,7 +17,7 @@ namespace Controller
         private void Awake()
         {
             Application.targetFrameRate = -1;
-            DOTween.SetTweensCapacity(200, 50);
+            DOTween.SetTweensCapacity(500, 50);
         }
         
         private void Start()
