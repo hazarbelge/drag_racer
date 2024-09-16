@@ -1,6 +1,6 @@
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
+using static Enums;
 
 namespace Controller
 {
@@ -10,7 +10,7 @@ namespace Controller
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private Transform target;
 
-        private const float RotationSpeed = 0.2f;
+        private GameController _gameController;
         
         private Vector3 _previousMousePos;
         private bool _isDragging;
@@ -18,8 +18,10 @@ namespace Controller
         private CinemachineTransposer _transposer;
         private CinemachineComposer _composer;
 
-        private void Start()
+        public void Init(GameController gameController)
         {
+            _gameController = gameController;
+            
             _transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             _composer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
 
@@ -41,6 +43,8 @@ namespace Controller
 
         private void Update()
         {
+            if (_gameController.GameState == GameState.Menu) return;
+            
             HandleMouseInput();
         }
 
@@ -66,7 +70,7 @@ namespace Controller
 
         private void RotateAroundTarget(Vector3 deltaMouse)
         {
-            _transposer.m_FollowOffset = Quaternion.AngleAxis(deltaMouse.x * RotationSpeed, Vector3.up) * _transposer.m_FollowOffset;
+            _transposer.m_FollowOffset = Quaternion.AngleAxis(deltaMouse.x * 0.2f, Vector3.up) * _transposer.m_FollowOffset;
             _composer.m_TrackedObjectOffset = Vector3.zero;
         }
     }

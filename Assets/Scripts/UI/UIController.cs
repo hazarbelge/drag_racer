@@ -35,6 +35,7 @@ namespace UI
 
         public void OnPlayClicked()
         {
+            _gameController.OnCountdownStart();
             menuPanel.Hide();
             vehiclePanel.Show();
             racePanel.Show();

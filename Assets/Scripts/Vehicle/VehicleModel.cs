@@ -17,6 +17,7 @@ namespace Vehicle
         public int CurrentGear { get; private set; } 
         public float EngineRpm { get; private set; }
         
+        private VehicleAudio _vehicleAudio;
         private bool _isThrottleActive;
         private bool _isBrakeActive;
         private bool _isDecelerationActive;
@@ -40,7 +41,18 @@ namespace Vehicle
             EngineRpm = 1000f;
         }
         
+        public void SetVehicleAudio(VehicleAudio vehicleAudio)
+        {
+            _vehicleAudio = vehicleAudio;
+        }
+        
         private float MaxSpeed => MaxSpeedsByGear[CurrentGear];
+        
+        private void CalculateEngineRpmOnGearChange()
+        {
+            EngineRpm = ShiftUpRpm * (CurrentSpeed / MaxSpeed);
+            _vehicleAudio.UpdateEngineSound();
+        }
         
         private void ShiftUp()
         {
@@ -50,7 +62,7 @@ namespace Vehicle
             }
             
             CurrentGear++;
-            EngineRpm = ShiftUpRpm * (CurrentSpeed / MaxSpeed);
+            CalculateEngineRpmOnGearChange();
         }
 
         private void ShiftDown()
@@ -61,7 +73,7 @@ namespace Vehicle
             }
             
             CurrentGear--;
-            EngineRpm = ShiftUpRpm * (CurrentSpeed / MaxSpeed);
+            CalculateEngineRpmOnGearChange();
         }
         
         private float RpmMultiplier => CurrentGear switch
@@ -81,6 +93,11 @@ namespace Vehicle
             if (!_isThrottleActive) return;
             
             EngineRpm = Mathf.Clamp(EngineRpm + 6f * RpmMultiplier, ShiftDownRpm, MaxRpm);
+            
+            if (EngineRpm >= ShiftUpRpm + 20f)
+            {
+                EngineRpm = Mathf.Clamp(EngineRpm - 30f * RpmMultiplier, ShiftDownRpm, MaxRpm);
+            }
         }
         
         public void ApplyBrake(bool isBrakeActive)
@@ -124,9 +141,8 @@ namespace Vehicle
             {
                 CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.02f, 0, MaxSpeed);
             }
+            
             TotalDistance += CurrentSpeed * deltaTime;
-             
-            Debug.Log($"Speed: {CurrentSpeed * 3.6f} km/h\nDistance: {TotalDistance} m\nGear: {CurrentGear + 1}\nRPM: {EngineRpm}");
         }
     }
 }

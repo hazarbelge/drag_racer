@@ -1,5 +1,6 @@
 using Controller;
 using UnityEngine;
+using static Enums;
 
 namespace Vehicle
 {
@@ -14,14 +15,14 @@ namespace Vehicle
         
         private GameController _gameController;
         private VehicleModel _vehicleModel;
-        
-        private bool _canSpeedUp;
+        private VehicleAudio _vehicleAudio;
         
         public void Init(GameController gameController)
         {
             _gameController = gameController;
             
             InitVehicleModel();
+            InitVehicleAudio();
         }
 
         private void InitVehicleModel()
@@ -40,14 +41,23 @@ namespace Vehicle
                 tireDiameter
             );
         }
+        
+        private void InitVehicleAudio()
+        {
+            _vehicleAudio = vehicleTransform.GetComponent<VehicleAudio>();
+            _vehicleAudio.Init(_vehicleModel);
+        }
 
         private void Update()
         {
+            if (_gameController.GameState == GameState.Menu) return;
+            
             _vehicleModel.ApplyBrake(BrakeInput);
             _vehicleModel.ApplyThrottle(ThrottleInput && !BrakeInput);
             _vehicleModel.ApplyDeceleration(!ThrottleInput && !BrakeInput);
+            _vehicleAudio.UpdateEngineSound();
             
-            if (_canSpeedUp)
+            if (_gameController.GameState == GameState.Racing)
             {
                 var deltaTime = Time.deltaTime;
             
@@ -83,9 +93,9 @@ namespace Vehicle
             }
         }
         
-        public void OnRaceStart()
+        public void OnCountdownStart()
         {
-            _canSpeedUp = true;
+            _vehicleAudio.PlayEngineSound();
         }
 
         private void OnFinishLinePassed()
@@ -95,9 +105,9 @@ namespace Vehicle
         
         public void OnRaceEnd()
         {
-            _canSpeedUp = false;
             vehicleTransform.position = startPos.position;
             _vehicleModel.SetDefaultAttributes();
+            _vehicleAudio.StopEngineSound();
         }
     }
 }
