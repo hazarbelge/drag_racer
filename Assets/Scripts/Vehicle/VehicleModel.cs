@@ -7,7 +7,6 @@ namespace Vehicle
     public class VehicleModel
     {
         public readonly float[] MaxSpeedsByGear;
-        public readonly AnimationCurve SpeedRpmCurve;
         public readonly float ShiftDownRpm;
         public readonly float ShiftUpRpm;
         public readonly float MaxRpm;
@@ -18,10 +17,13 @@ namespace Vehicle
         public int CurrentGear { get; private set; } 
         public float EngineRpm { get; private set; }
         
-        public VehicleModel(float[] maxSpeedsByGear, AnimationCurve speedRpmCurve, float shiftDownRpm, float shiftUpRpm, float maxRpm, float tireDiameter)
+        private bool _isThrottleActive;
+        private bool _isBrakeActive;
+        private bool _isDecelerationActive;
+        
+        public VehicleModel(float[] maxSpeedsByGear, float shiftDownRpm, float shiftUpRpm, float maxRpm, float tireDiameter)
         {
             MaxSpeedsByGear = maxSpeedsByGear;
-            SpeedRpmCurve = speedRpmCurve;
             ShiftDownRpm = shiftDownRpm;
             ShiftUpRpm = shiftUpRpm;
             MaxRpm = maxRpm;
@@ -37,7 +39,9 @@ namespace Vehicle
             CurrentGear = 0;
             EngineRpm = 1000f;
         }
-
+        
+        private float MaxSpeed => MaxSpeedsByGear[CurrentGear];
+        
         private void ShiftUp()
         {
             if (CurrentGear >= MaxSpeedsByGear.Length - 1)
@@ -46,7 +50,7 @@ namespace Vehicle
             }
             
             CurrentGear++;
-            EngineRpm = 1000f;
+            EngineRpm = ShiftUpRpm * (CurrentSpeed / MaxSpeed);
         }
 
         private void ShiftDown()
@@ -57,44 +61,47 @@ namespace Vehicle
             }
             
             CurrentGear--;
-            EngineRpm = ShiftUpRpm;
+            EngineRpm = ShiftUpRpm * (CurrentSpeed / MaxSpeed);
         }
         
         private float RpmMultiplier => CurrentGear switch
         {
-            0 => 2f,
-            1 => 1.5f,
-            2 => 1.25f,
+            0 => 2.5f,
+            1 => 2f,
+            2 => 1.5f,
             3 => 1f,
-            4 => 0.5f,
+            4 => 0.75f,
             _ => 1f
         };
 
         public void ApplyThrottle(bool isThrottleActive)
         {
-            if (isThrottleActive)
-            {
-                EngineRpm = Mathf.Clamp(EngineRpm + 10f * RpmMultiplier, ShiftDownRpm, MaxRpm);
-            }
+            _isThrottleActive = isThrottleActive;
+            
+            if (!_isThrottleActive) return;
+            
+            EngineRpm = Mathf.Clamp(EngineRpm + 5f * RpmMultiplier, ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyBrake(bool isBrakeActive)
         {
-            if (isBrakeActive)
-            {
-                EngineRpm = Mathf.Clamp(EngineRpm - 20f * RpmMultiplier, ShiftDownRpm, MaxRpm);
-            }
+            _isBrakeActive = isBrakeActive;
+            
+            if (!_isBrakeActive) return;
+            
+            EngineRpm = Mathf.Clamp(EngineRpm - 20f * RpmMultiplier, ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyDeceleration(bool isDecelerationActive)
         {
-            if (isDecelerationActive)
-            {
-                EngineRpm = Mathf.Clamp(EngineRpm - 5f * RpmMultiplier, ShiftDownRpm, MaxRpm);
-            }
+            _isDecelerationActive = isDecelerationActive;
+            
+            if (!_isDecelerationActive) return;
+            
+            EngineRpm = Mathf.Clamp(EngineRpm - 2.5f * RpmMultiplier, ShiftDownRpm, MaxRpm);
         }
         
-        public void UpdateSpeed(float deltaTime)
+        public void UpdateVehicle(float deltaTime)
         {
             if (EngineRpm >= ShiftUpRpm)
             {
@@ -104,24 +111,22 @@ namespace Vehicle
             {
                 ShiftDown();
             }
-            
-            var currentLerpRangeByGear = 0.2f * (CurrentGear + 1);
-            var currentSpeedValue = SpeedRpmCurve.Evaluate(Mathf.Lerp(currentLerpRangeByGear - 0.2f, currentLerpRangeByGear, Mathf.InverseLerp(ShiftDownRpm, MaxRpm, EngineRpm)));
-            var currentMinSpeedValue = SpeedRpmCurve.Evaluate(Mathf.Lerp(currentLerpRangeByGear - 0.2f, currentLerpRangeByGear, 0));
-            var currentMaxSpeedValue = SpeedRpmCurve.Evaluate(Mathf.Lerp(currentLerpRangeByGear - 0.2f, currentLerpRangeByGear, 1));
-            var currentMinSpeed = CurrentGear == 0 ? 0f : MaxSpeedsByGear[CurrentGear - 1];
-            var currentMaxSpeed = MaxSpeedsByGear[CurrentGear];
-            CurrentSpeed = Mathf.Lerp(currentMinSpeed, currentMaxSpeed, Mathf.InverseLerp(currentMinSpeedValue, currentMaxSpeedValue, currentSpeedValue));
+
+            if (_isThrottleActive)
+            {
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 0.025f, 0, MaxSpeed);
+            } 
+            else if (_isBrakeActive)
+            {
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.1f, 0, MaxSpeed);
+            }
+            else if (_isDecelerationActive)
+            {
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.0125f, 0, MaxSpeed);
+            }
             TotalDistance += CurrentSpeed * deltaTime;
              
             Debug.Log($"Speed: {CurrentSpeed * 3.6f} km/h\nDistance: {TotalDistance} m\nGear: {CurrentGear + 1}\nRPM: {EngineRpm}");
-        }
-        
-        public void OnRaceStart()
-        {
-            var distanceToShiftUp = Mathf.Abs(EngineRpm - ShiftUpRpm);
-            var bonusRpm = distanceToShiftUp <= 200 ? (200 - distanceToShiftUp) * 5f : 0;
-            EngineRpm = 1000f + bonusRpm;
         }
     }
 }

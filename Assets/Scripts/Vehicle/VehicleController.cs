@@ -6,7 +6,8 @@ namespace Vehicle
     {
         [SerializeField] private Transform vehicleTransform;
         [SerializeField] private Transform[] wheels = new Transform[4];
-        [SerializeField] private AnimationCurve speedRpmCurve;
+        [SerializeField] private Transform startPos;
+        [SerializeField] private Transform finishLinePos;
         private static bool ThrottleInput => Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         private static bool BrakeInput => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
         
@@ -32,7 +33,6 @@ namespace Vehicle
 
             _vehicleModel = new VehicleModel(
                 maxSpeedsInMs,
-                speedRpmCurve,
                 shiftDownRpm,
                 shiftUpRpm,
                 maxRpm,
@@ -50,12 +50,17 @@ namespace Vehicle
             {
                 var deltaTime = Time.deltaTime;
             
-                _vehicleModel.UpdateSpeed(deltaTime);
+                _vehicleModel.UpdateVehicle(deltaTime);
             
                 var distance = _vehicleModel.CurrentSpeed * deltaTime;
             
                 UpdateWheelRotation(distance);
                 MoveVehicle(distance);
+                
+                if (vehicleTransform.position.z >= finishLinePos.position.z)
+                {
+                    OnFinishLinePassed();
+                }
             }
             
             _gameController.UpdateRaceInfo(_vehicleModel.TotalDistance, _vehicleModel.CurrentSpeed * 3.6f, _vehicleModel.EngineRpm, _vehicleModel.CurrentGear + 1);
@@ -79,13 +84,18 @@ namespace Vehicle
         
         public void OnRaceStart()
         {
-            _vehicleModel.OnRaceStart();
             _canSpeedUp = true;
+        }
+
+        private void OnFinishLinePassed()
+        {
+            _gameController.OnRaceEnd();
         }
         
         public void OnRaceEnd()
         {
             _canSpeedUp = false;
+            vehicleTransform.position = startPos.position;
         }
     }
 }

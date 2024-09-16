@@ -11383,7 +11383,6 @@ GameObject:
   - component: {fileID: 6228445335406228425}
   - component: {fileID: 6080923074985625274}
   - component: {fileID: 2821587423184549912}
-  - component: {fileID: 1697001321329949352}
   m_Layer: 0
   m_Name: HDRP_Car_Shadow
   m_TagString: Untagged
@@ -11456,28 +11455,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1697001321329949352
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5341044419483423851}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5356711009117570623
 GameObject:
   m_ObjectHideFlags: 0
