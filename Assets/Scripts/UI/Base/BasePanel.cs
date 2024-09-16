@@ -10,10 +10,16 @@ namespace UI.Base
         protected UIController UIController;
         private CanvasGroup _canvasGroup;
         
+        private bool _initialBlockRaycasts;
+        private bool _initialInteractable;
+        
         public virtual void Init(UIController uiController)
         {
             UIController = uiController;
             _canvasGroup = GetComponent<CanvasGroup>();
+            
+            _initialBlockRaycasts = _canvasGroup.blocksRaycasts;
+            _initialInteractable = _canvasGroup.interactable;
         }
         
         private void FadeOut(Action onComplete = null, float duration = 0.5f)
@@ -33,6 +39,8 @@ namespace UI.Base
             FadeIn(() =>
             {
                 _canvasGroup.alpha = 1;
+                _canvasGroup.interactable = _initialInteractable;
+                _canvasGroup.blocksRaycasts = _initialBlockRaycasts;
                 gameObject.SetActive(true);
                 onComplete?.Invoke();
             }, duration);
@@ -43,6 +51,8 @@ namespace UI.Base
             FadeOut(() =>
             {
                 _canvasGroup.alpha = 0;
+                _canvasGroup.interactable = false;
+                _canvasGroup.blocksRaycasts = false;
                 gameObject.SetActive(false);
                 onComplete?.Invoke();
             }, duration);

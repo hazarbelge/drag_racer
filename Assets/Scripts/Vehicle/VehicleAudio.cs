@@ -2,7 +2,7 @@
 
 namespace Vehicle
 {
-    [RequireComponent(typeof(VehicleAudio))]
+    [RequireComponent(typeof(AudioSource))]
     public class VehicleAudio : MonoBehaviour
     {
         [SerializeField] private AudioSource engineAudioSource;

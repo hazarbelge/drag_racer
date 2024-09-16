@@ -106,7 +106,7 @@ namespace Vehicle
             
             if (!_isBrakeActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 15f * RpmMultiplier * (forceStop ? 10f : 1f), ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm - 15f * RpmMultiplier * (forceStop ? 5f : 1f), ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyDeceleration(bool isDecelerationActive)

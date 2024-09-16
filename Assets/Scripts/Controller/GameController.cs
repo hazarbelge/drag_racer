@@ -15,11 +15,11 @@ namespace Controller
     
         private void Awake()
         {
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = -1;
             
             uiController.Init(this);
             vehicleController.Init(this);
-            cameraController.Init(this);
+            cameraController.Init();
         }
     
         public void OnCountdownStart()

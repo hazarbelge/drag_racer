@@ -1,16 +1,13 @@
 using Cinemachine;
 using UnityEngine;
-using static Enums;
+using UnityEngine.EventSystems;
 
 namespace Controller
 {
-    [RequireComponent(typeof(CinemachineBrain))]
-    public class CameraController : MonoBehaviour
+    public class CameraController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private Transform target;
-
-        private GameController _gameController;
         
         private Vector3 _previousMousePos;
         private bool _isDragging;
@@ -18,10 +15,8 @@ namespace Controller
         private CinemachineTransposer _transposer;
         private CinemachineComposer _composer;
 
-        public void Init(GameController gameController)
+        public void Init()
         {
-            _gameController = gameController;
-            
             _transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             _composer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
 
@@ -41,30 +36,23 @@ namespace Controller
             virtualCamera.LookAt = null;
         }
 
-        private void Update()
+        public void OnPointerDown(PointerEventData eventData)
         {
-            if (_gameController.GameState == GameState.Menu) return;
-            
-            HandleMouseInput();
+            _previousMousePos = eventData.position;
+            _isDragging = true;
         }
 
-        private void HandleMouseInput()
+        public void OnPointerUp(PointerEventData eventData)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _previousMousePos = Input.mousePosition;
-                _isDragging = true;
-            }
+            _isDragging = false;
+        }
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                _isDragging = false;
-            }
-
+        public void OnDrag(PointerEventData eventData)
+        {
             if (_isDragging)
             {
-                RotateAroundTarget(Input.mousePosition - _previousMousePos);
-                _previousMousePos = Input.mousePosition;
+                RotateAroundTarget(eventData.position - (Vector2)_previousMousePos);
+                _previousMousePos = eventData.position;
             }
         }
 
