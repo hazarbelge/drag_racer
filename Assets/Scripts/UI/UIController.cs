@@ -15,6 +15,7 @@ namespace UI
 
         private bool _isRaceStarted;
         private float _currentRaceTime;
+        private float _totalDistance;
         
         public void Init(GameController gameController)
         {
@@ -31,6 +32,7 @@ namespace UI
             startPanel.Hide();
             
             _currentRaceTime = 0f;
+            _totalDistance = 0f;
         }
 
         public void OnPlayClicked()
@@ -50,7 +52,6 @@ namespace UI
             }
             
             _currentRaceTime += Time.deltaTime;
-            racePanel.UpdateRaceTime(_currentRaceTime);
         }
 
         public void OnRaceStart()
@@ -60,7 +61,9 @@ namespace UI
         
         public void UpdateRaceInfo(float totalDistance, float speedKmh, float engineRpm, int gear)
         {
-            vehiclePanel.UpdateUI(totalDistance, speedKmh, engineRpm, !_isRaceStarted ? -1 : gear);
+            _totalDistance = totalDistance;
+            racePanel.UpdateUI(_currentRaceTime, _totalDistance);
+            vehiclePanel.UpdateUI(speedKmh, engineRpm, !_isRaceStarted ? -1 : gear);
         }
         
         public void OnRaceEnd(Action callback)
@@ -68,6 +71,7 @@ namespace UI
             _isRaceStarted = false;
             
             menuPanel.Show(callback, duration: 1.25f);
+            menuPanel.UpdateUI(_currentRaceTime, _totalDistance);
             racePanel.Hide(duration: 1.25f);
             vehiclePanel.Hide();
             startPanel.Hide();
