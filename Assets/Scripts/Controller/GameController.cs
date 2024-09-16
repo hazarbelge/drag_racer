@@ -15,6 +15,8 @@ namespace Controller
     
         private void Awake()
         {
+            Application.targetFrameRate = 60;
+            
             uiController.Init(this);
             vehicleController.Init(this);
             cameraController.Init(this);

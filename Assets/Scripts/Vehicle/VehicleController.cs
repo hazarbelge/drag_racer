@@ -117,6 +117,9 @@ namespace Vehicle
             vehicleTransform.position = startPos.position;
             _vehicleModel.SetDefaultAttributes();
             _vehicleAudio.StopEngineSound();
+            
+            _throttleInputByButton = false;
+            _brakeInputByButton = false;
         }
 
         #region VehicleInput
