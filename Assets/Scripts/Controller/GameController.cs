@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using DG.Tweening;
+using UI;
 using UnityEngine;
 using Vehicle;
 using static Enums;
@@ -16,6 +17,7 @@ namespace Controller
         private void Awake()
         {
             Application.targetFrameRate = -1;
+            DOTween.SetTweensCapacity(200, 50);
         }
         
         private void Start()

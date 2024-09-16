@@ -22,7 +22,7 @@ namespace UI
             base.Init(uiController);
             UpdateUI(0, 0, 0);
             GenerateNumbers(rpmNeedle.transform.parent, 6, 6);
-            GenerateNumbers(speedNeedle.transform.parent, 300, 10);
+            GenerateNumbers(speedNeedle.transform.parent, 270, 9);
         }
 
         public void UpdateUI(float speedKmh, float engineRpm, int gear)
@@ -32,7 +32,7 @@ namespace UI
             gearText.text = gear == -1 ? "N" : gear.ToString();
             
             rpmNeedle.DORotate(new Vector3(0, 0, Mathf.Lerp(-5, -175, Mathf.InverseLerp(0, 6000, engineRpm))), 0.2f);
-            speedNeedle.DORotate(new Vector3(0, 0, Mathf.Lerp(-5, -175, Mathf.InverseLerp(0, 260, speedKmh))), 0.2f);
+            speedNeedle.DORotate(new Vector3(0, 0, Mathf.Lerp(-5, -175, Mathf.InverseLerp(0, 270, speedKmh))), 0.2f);
         }
         
         private void GenerateNumbers(Transform parentTransform, int maxValue, int pointCount)
