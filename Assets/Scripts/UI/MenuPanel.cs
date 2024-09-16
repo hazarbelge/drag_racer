@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI raceTimeText;
         [SerializeField] private TextMeshProUGUI distanceText;
 
-        public override void Show(Action onComplete = null, float duration = 0.5f)
+        public override void Show(Action onComplete = null, float duration = 0.1f)
         {
             base.Show(onComplete, duration);
             UpdateUI(0, 0);

@@ -66,9 +66,9 @@ namespace UI
         
         public void OnRaceEnd(Action callback)
         {
-            menuPanel.Show(callback, duration: 1.25f);
+            menuPanel.Show(callback, duration: 0.75f);
             menuPanel.UpdateUI(_currentRaceTime, _totalDistance);
-            racePanel.Hide(duration: 1.25f);
+            racePanel.Hide(duration: 0.75f);
             vehiclePanel.Hide();
             startPanel.Hide();
         }

@@ -22,19 +22,19 @@ namespace UI.Base
             _initialInteractable = _canvasGroup.interactable;
         }
         
-        private void FadeOut(Action onComplete = null, float duration = 0.25f)
+        private void FadeOut(Action onComplete = null, float duration = 0.1f)
         {
             DOTween.Kill(_canvasGroup.alpha, true);
             DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 0, duration).OnComplete(() => onComplete?.Invoke());
         }
         
-        private void FadeIn(Action onComplete = null, float duration = 0.25f)
+        private void FadeIn(Action onComplete = null, float duration = 0.1f)
         {
             DOTween.Kill(_canvasGroup.alpha, true);
             DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 1, duration).OnComplete(() => onComplete?.Invoke());
         }
         
-        public virtual void Show(Action onComplete = null, float duration = 0.25f)
+        public virtual void Show(Action onComplete = null, float duration = 0.1f)
         {
             FadeIn(() =>
             {
@@ -46,7 +46,7 @@ namespace UI.Base
             }, duration);
         }
         
-        public virtual void Hide(Action onComplete = null, float duration = 0.25f)
+        public virtual void Hide(Action onComplete = null, float duration = 0.1f)
         {
             FadeOut(() =>
             {

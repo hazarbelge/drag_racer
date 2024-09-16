@@ -81,8 +81,8 @@ namespace Vehicle
             0 => 2.5f,
             1 => 2f,
             2 => 1.5f,
-            3 => 1f,
-            4 => 0.75f,
+            3 => 1.2f,
+            4 => 0.8f,
             _ => 1f
         } * Time.deltaTime;
 
@@ -138,15 +138,15 @@ namespace Vehicle
 
             if (_isThrottleActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 2f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 1f * SpeedRpmIncreaseMultiplier * (CurrentGear + 1) , 0, MaxSpeed);
             } 
             else if (_isBrakeActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 5f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 3f * SpeedRpmIncreaseMultiplier * (CurrentGear + 1), 0, MaxSpeed);
             }
             else if (_isDecelerationActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 1f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.5f * SpeedRpmIncreaseMultiplier * (CurrentGear + 1), 0, MaxSpeed);
             }
             
             TotalDistance += CurrentSpeed * deltaTime;
