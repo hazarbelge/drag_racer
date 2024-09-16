@@ -32,6 +32,7 @@ namespace Controller
         public void OnRaceStart()
         {
             GameState = GameState.Racing;
+            vehicleController.OnRaceStart();
         }
     
         public void UpdateRaceInfo(float totalDistance, float speedKmh, float engineRpm, int gear)

@@ -106,6 +106,11 @@ namespace Vehicle
         {
             _vehicleAudio.PlayEngineSound();
         }
+        
+        public void OnRaceStart()
+        {
+            _vehicleModel.SetDefaultAttributes();
+        }
 
         private void OnFinishLinePassed()
         {
