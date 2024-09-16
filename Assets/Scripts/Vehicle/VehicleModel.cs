@@ -29,10 +29,10 @@ namespace Vehicle
             MaxRpm = maxRpm;
             TireDiameter = tireDiameter;
             
-            Init();
+            SetDefaultAttributes();
         }
 
-        private void Init()
+        public void SetDefaultAttributes()
         {
             TotalDistance = 0f;
             CurrentSpeed = 0f;
@@ -80,7 +80,7 @@ namespace Vehicle
             
             if (!_isThrottleActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm + 5f * RpmMultiplier, ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm + 6f * RpmMultiplier, ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyBrake(bool isBrakeActive)
@@ -89,7 +89,7 @@ namespace Vehicle
             
             if (!_isBrakeActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 20f * RpmMultiplier, ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm - 15f * RpmMultiplier, ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyDeceleration(bool isDecelerationActive)
@@ -98,7 +98,7 @@ namespace Vehicle
             
             if (!_isDecelerationActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 2.5f * RpmMultiplier, ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm - 3f * RpmMultiplier, ShiftDownRpm, MaxRpm);
         }
         
         public void UpdateVehicle(float deltaTime)
@@ -114,7 +114,7 @@ namespace Vehicle
 
             if (_isThrottleActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 0.025f, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 0.04f, 0, MaxSpeed);
             } 
             else if (_isBrakeActive)
             {
@@ -122,7 +122,7 @@ namespace Vehicle
             }
             else if (_isDecelerationActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.0125f, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.02f, 0, MaxSpeed);
             }
             TotalDistance += CurrentSpeed * deltaTime;
              

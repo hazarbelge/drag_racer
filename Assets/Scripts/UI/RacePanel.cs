@@ -8,9 +8,9 @@ namespace UI
     { 
         [SerializeField] private TMPro.TextMeshProUGUI raceTimeText;
         
-        public override void Show(Action onComplete = null)
+        public override void Show(Action onComplete = null, float duration = 0.5f)
         {
-            base.Show(onComplete);
+            base.Show(onComplete, duration);
             UpdateRaceTime(0);
         }
         

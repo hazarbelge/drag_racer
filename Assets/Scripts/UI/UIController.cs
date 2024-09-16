@@ -1,3 +1,5 @@
+using System;
+using Controller;
 using UnityEngine;
 
 namespace UI
@@ -60,12 +62,12 @@ namespace UI
             vehiclePanel.UpdateUI(totalDistance, speedKmh, engineRpm, !_isRaceStarted ? -1 : gear);
         }
         
-        public void OnRaceEnd()
+        public void OnRaceEnd(Action callback)
         {
             _isRaceStarted = false;
             
-            menuPanel.Show();
-            racePanel.Hide();
+            menuPanel.Show(callback, duration: 1.25f);
+            racePanel.Hide(duration: 1.25f);
             vehiclePanel.Hide();
             startPanel.Hide();
         }

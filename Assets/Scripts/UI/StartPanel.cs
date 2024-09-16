@@ -14,9 +14,9 @@ namespace UI
         [SerializeField] private Image countdownImage;
         [SerializeField] private Sprite[] countdownSprites = new Sprite[CountdownSeconds];
 
-        public override void Show(Action onComplete = null)
+        public override void Show(Action onComplete = null, float duration = 0.5f)
         {
-            base.Show(onComplete);
+            base.Show(onComplete, duration);
             startText.alpha = 0;
         }
 

@@ -1,3 +1,4 @@
+using Controller;
 using UnityEngine;
 
 namespace Vehicle
@@ -96,6 +97,7 @@ namespace Vehicle
         {
             _canSpeedUp = false;
             vehicleTransform.position = startPos.position;
+            _vehicleModel.SetDefaultAttributes();
         }
     }
 }

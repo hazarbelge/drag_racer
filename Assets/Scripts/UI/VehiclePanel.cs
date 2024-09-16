@@ -19,18 +19,6 @@ namespace UI
             UpdateUI(0, 0, 0, 0);
         }
 
-        public override void Show(Action onComplete = null)
-        {
-            base.Show(onComplete);
-            UpdateUI(0, 0, 0, 0);
-        }
-        
-        public override void Hide(Action onComplete = null)
-        {
-            base.Hide(onComplete);
-            UpdateUI(0, 0, 0, 0);
-        }
-
         public void UpdateUI(float totalDistance, float speedKmh, float engineRpm, int gear)
         {
             speedText.text = $"{Mathf.RoundToInt(speedKmh)} KM/H";
