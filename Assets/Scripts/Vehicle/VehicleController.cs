@@ -10,12 +10,13 @@ namespace Vehicle
         [SerializeField] private Transform[] wheels = new Transform[4];
         [SerializeField] private Transform startPos;
         [SerializeField] private Transform finishLinePos;
-        private static bool ThrottleInput => Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        private static bool BrakeInput => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
         
         private GameController _gameController;
         private VehicleModel _vehicleModel;
         private VehicleAudio _vehicleAudio;
+        
+        private bool _throttleInputByButton;
+        private bool _brakeInputByButton;
         
         public void Init(GameController gameController)
         {
@@ -52,9 +53,17 @@ namespace Vehicle
         {
             if (_gameController.GameState == GameState.Menu) return;
             
-            _vehicleModel.ApplyBrake(BrakeInput);
-            _vehicleModel.ApplyThrottle(ThrottleInput && !BrakeInput);
-            _vehicleModel.ApplyDeceleration(!ThrottleInput && !BrakeInput);
+            if (_gameController.GameState != GameState.PostRace)
+            {
+                _vehicleModel.ApplyBrake(BrakeInput);
+                _vehicleModel.ApplyThrottle(ThrottleInput && !BrakeInput);
+                _vehicleModel.ApplyDeceleration(!ThrottleInput && !BrakeInput);
+            } 
+            else
+            {
+                _vehicleModel.ApplyBrake(true);
+            }
+            
             _vehicleAudio.UpdateEngineSound();
             
             if (_gameController.GameState == GameState.Racing)
@@ -109,5 +118,32 @@ namespace Vehicle
             _vehicleModel.SetDefaultAttributes();
             _vehicleAudio.StopEngineSound();
         }
+
+        #region VehicleInput
+
+        public void ThrottleButtonDown()
+        {
+            _throttleInputByButton = true;
+        }
+        
+        public void ThrottleButtonUp()
+        {
+            _throttleInputByButton = false;
+        }
+        
+        public void BrakeButtonDown()
+        {
+            _brakeInputByButton = true;
+        }
+        
+        public void BrakeButtonUp()
+        {
+            _brakeInputByButton = false;
+        }
+        
+        private bool ThrottleInput => _throttleInputByButton || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        private bool BrakeInput => _brakeInputByButton || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+
+        #endregion
     }
 }

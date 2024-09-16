@@ -40,6 +40,7 @@ namespace Controller
     
         public void OnRaceEnd()
         {
+            GameState = GameState.PostRace;
             cameraController.OnRaceEnd();
             uiController.OnRaceEnd(() =>
             {
