@@ -37,6 +37,9 @@ namespace UI
 
         public void OnPlayClicked()
         {
+            _currentRaceTime = 0f;
+            _totalDistance = 0f;
+            
             _gameController.OnCountdownStart();
             menuPanel.Hide();
             vehiclePanel.Show();
@@ -68,9 +71,6 @@ namespace UI
             racePanel.Hide(duration: 1.25f);
             vehiclePanel.Hide();
             startPanel.Hide();
-            
-            _currentRaceTime = 0f;
-            _totalDistance = 0f;
         }
     }
 }
