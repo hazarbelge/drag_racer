@@ -84,7 +84,7 @@ namespace Vehicle
             3 => 1f,
             4 => 0.75f,
             _ => 1f
-        } * (Application.platform == RuntimePlatform.Android ? 2f : 1f);
+        } * Time.deltaTime;
 
         public void ApplyThrottle(bool isThrottleActive)
         {
@@ -92,11 +92,11 @@ namespace Vehicle
             
             if (!_isThrottleActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm + 6f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm + 600f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
             
             if (EngineRpm >= ShiftUpRpm + 20f)
             {
-                EngineRpm = Mathf.Clamp(EngineRpm - 30f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
+                EngineRpm = Mathf.Clamp(EngineRpm - 3000f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
             }
         }
         
@@ -106,7 +106,7 @@ namespace Vehicle
             
             if (!_isBrakeActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 15f * SpeedRpmIncreaseMultiplier * (forceStop ? 5f : 1f), ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm - 1500f * SpeedRpmIncreaseMultiplier * (forceStop ? 5f : 1f), ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyDeceleration(bool isDecelerationActive)
@@ -115,7 +115,7 @@ namespace Vehicle
             
             if (!_isDecelerationActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 3f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm - 300f * SpeedRpmIncreaseMultiplier, ShiftDownRpm, MaxRpm);
         }
         
         public void UpdateVehicle(float deltaTime)
@@ -131,15 +131,15 @@ namespace Vehicle
 
             if (_isThrottleActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 0.04f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed + 2f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
             } 
             else if (_isBrakeActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.1f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 5f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
             }
             else if (_isDecelerationActive)
             {
-                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 0.02f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
+                CurrentSpeed = Mathf.Clamp(CurrentSpeed - 1f * SpeedRpmIncreaseMultiplier, 0, MaxSpeed);
             }
             
             TotalDistance += CurrentSpeed * deltaTime;
