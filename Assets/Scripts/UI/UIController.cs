@@ -1,6 +1,7 @@
 using System;
 using Controller;
 using UnityEngine;
+using static Enums;
 
 namespace UI
 {
@@ -13,7 +14,6 @@ namespace UI
 
         private GameController _gameController;
 
-        private bool _isRaceStarted;
         private float _currentRaceTime;
         private float _totalDistance;
         
@@ -46,35 +46,31 @@ namespace UI
 
         private void Update()
         {
-            if (!_isRaceStarted)
+            if (_gameController.GameState != GameState.Racing)
             {
                 return;
             }
             
             _currentRaceTime += Time.deltaTime;
         }
-
-        public void OnRaceStart()
-        {
-            _isRaceStarted = true;
-        }
         
         public void UpdateRaceInfo(float totalDistance, float speedKmh, float engineRpm, int gear)
         {
             _totalDistance = totalDistance;
             racePanel.UpdateUI(_currentRaceTime, _totalDistance);
-            vehiclePanel.UpdateUI(speedKmh, engineRpm, !_isRaceStarted ? -1 : gear);
+            vehiclePanel.UpdateUI(speedKmh, engineRpm, _gameController.GameState != GameState.Racing ? -1 : gear);
         }
         
         public void OnRaceEnd(Action callback)
         {
-            _isRaceStarted = false;
-            
             menuPanel.Show(callback, duration: 1.25f);
             menuPanel.UpdateUI(_currentRaceTime, _totalDistance);
             racePanel.Hide(duration: 1.25f);
             vehiclePanel.Hide();
             startPanel.Hide();
+            
+            _currentRaceTime = 0f;
+            _totalDistance = 0f;
         }
     }
 }

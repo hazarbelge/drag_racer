@@ -23,14 +23,13 @@ namespace Controller
         public void OnCountdownStart()
         {
             GameState = GameState.Countdown;
+            cameraController.OnCountdownStart();
             vehicleController.OnCountdownStart();
         }
     
         public void OnRaceStart()
         {
             GameState = GameState.Racing;
-            cameraController.OnRaceStart();
-            uiController.OnRaceStart();
         }
     
         public void UpdateRaceInfo(float totalDistance, float speedKmh, float engineRpm, int gear)

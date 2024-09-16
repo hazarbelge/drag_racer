@@ -100,13 +100,13 @@ namespace Vehicle
             }
         }
         
-        public void ApplyBrake(bool isBrakeActive)
+        public void ApplyBrake(bool isBrakeActive, bool forceStop = false)
         {
             _isBrakeActive = isBrakeActive;
             
             if (!_isBrakeActive) return;
             
-            EngineRpm = Mathf.Clamp(EngineRpm - 15f * RpmMultiplier, ShiftDownRpm, MaxRpm);
+            EngineRpm = Mathf.Clamp(EngineRpm - 15f * RpmMultiplier * (forceStop ? 10f : 1f), ShiftDownRpm, MaxRpm);
         }
         
         public void ApplyDeceleration(bool isDecelerationActive)

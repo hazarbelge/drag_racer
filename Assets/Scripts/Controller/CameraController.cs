@@ -29,7 +29,7 @@ namespace Controller
             virtualCamera.LookAt = target;
         }
 
-        public void OnRaceStart()
+        public void OnCountdownStart()
         {
             virtualCamera.Follow = target;
             virtualCamera.LookAt = target;

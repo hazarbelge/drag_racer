@@ -53,7 +53,7 @@ namespace Vehicle
         {
             if (_gameController.GameState == GameState.Menu) return;
             
-            if (_gameController.GameState != GameState.PostRace)
+            if (_gameController.GameState is GameState.Racing or GameState.Countdown)
             {
                 _vehicleModel.ApplyBrake(BrakeInput);
                 _vehicleModel.ApplyThrottle(ThrottleInput && !BrakeInput);
@@ -61,12 +61,12 @@ namespace Vehicle
             } 
             else
             {
-                _vehicleModel.ApplyBrake(true);
+                _vehicleModel.ApplyBrake(true, true);
             }
             
             _vehicleAudio.UpdateEngineSound();
             
-            if (_gameController.GameState == GameState.Racing)
+            if (_gameController.GameState is GameState.Racing or GameState.PostRace)
             {
                 var deltaTime = Time.deltaTime;
             
