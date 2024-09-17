@@ -98,7 +98,7 @@ namespace Vehicle
 
         private void UpdateWheelRotation(float distance)
         {
-            var rotateAngle = distance * Mathf.Rad2Deg / _vehicleModel.TireDiameter;
+            var rotateAngle = distance * Mathf.Rad2Deg / (_vehicleModel.TireDiameter * 2 * Mathf.PI);
             foreach (var wheel in wheels)
             {
                 wheel.Rotate(Vector3.right, rotateAngle);
