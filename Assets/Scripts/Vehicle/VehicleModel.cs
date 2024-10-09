@@ -10,7 +10,7 @@ namespace Vehicle
         public readonly float ShiftDownRpm;
         public readonly float ShiftUpRpm;
         public readonly float MaxRpm;
-        public readonly float TireDiameter;
+        public readonly float TireRadius;
 
         public float TotalDistance { get; private set; }
         public float CurrentSpeed { get; private set; }
@@ -22,13 +22,13 @@ namespace Vehicle
         private bool _isBrakeActive;
         private bool _isDecelerationActive;
         
-        public VehicleModel(float[] maxSpeedsByGear, float shiftDownRpm, float shiftUpRpm, float maxRpm, float tireDiameter)
+        public VehicleModel(float[] maxSpeedsByGear, float shiftDownRpm, float shiftUpRpm, float maxRpm, float tireRadius)
         {
             MaxSpeedsByGear = maxSpeedsByGear;
             ShiftDownRpm = shiftDownRpm;
             ShiftUpRpm = shiftUpRpm;
             MaxRpm = maxRpm;
-            TireDiameter = tireDiameter;
+            TireRadius = tireRadius;
             
             SetDefaultAttributes();
         }

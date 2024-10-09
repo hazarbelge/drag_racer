@@ -6,6 +6,6 @@
         public const float ShiftDownRpm = 1000f;
         public const float ShiftUpRpm = 5800f;
         public const float MaxRpm = 6000f;
-        public const float TireDiameter = 0.33f;
+        public const float TireRadius = 0.33f;
     }
 }

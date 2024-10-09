@@ -33,7 +33,7 @@ namespace Vehicle
                 VehicleConfig.ShiftDownRpm,
                 VehicleConfig.ShiftUpRpm,
                 VehicleConfig.MaxRpm,
-                VehicleConfig.TireDiameter
+                VehicleConfig.TireRadius
             );
         }
         
@@ -98,7 +98,7 @@ namespace Vehicle
 
         private void UpdateWheelRotation(float distance)
         {
-            var rotateAngle = distance * Mathf.Rad2Deg / (_vehicleModel.TireDiameter * 2 * Mathf.PI);
+            var rotateAngle = distance * 360 / (_vehicleModel.TireRadius * 2 * Mathf.PI);
             foreach (var wheel in wheels)
             {
                 wheel.Rotate(Vector3.right, rotateAngle);
